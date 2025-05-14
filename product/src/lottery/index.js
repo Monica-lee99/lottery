@@ -212,7 +212,7 @@ function bindEvent() {
     if (isLotting) {
       if (e.target.id === "lottery") {
         rotateObj.stop();
-        btns.lottery.innerHTML = "开始抽奖";
+        btns.lottery.innerHTML = "开始点名";
       } else {
         addQipao("正在抽奖，抽慢一点点～～");
       }
@@ -265,9 +265,14 @@ function bindEvent() {
         changePrize();
         resetCard().then(res => {
           // 抽奖
+          let input = prompt('请输入抽取的人数');
+          console.log(input, typeof input, 111);
+          if (input !== null && input !== "" && !isNaN(input) && Number(input) > 0) {
+            EACH_COUNT[currentPrizeIndex] = parseInt(input);
+          }
           lottery();
+          addQipao(`正在抽取[${currentPrize.title}],调整好姿势`);
         });
-        addQipao(`正在抽取[${currentPrize.title}],调整好姿势`);
         break;
       // 重新抽奖
       case "reLottery":
@@ -616,7 +621,7 @@ function lottery() {
   //   btns.lottery.innerHTML = "开始抽奖";
   //   return;
   // }
-  btns.lottery.innerHTML = "结束抽奖";
+  btns.lottery.innerHTML = "结束点名";
   rotateBall().then(() => {
     // 将之前的记录置空
     currentLuckys = [];

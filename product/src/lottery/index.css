@@ -21,12 +21,11 @@ a {
 #container {
   z-index: 3;
   position: relative;
-  margin: 0 15vh;
+  margin: 0 auto;
 }
 
 #menu {
   z-index: 4;
-  margin-left: 15vh;
 }
 
 .canvas-box {
