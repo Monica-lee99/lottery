@@ -202,6 +202,16 @@ function setLotteryStatus(status = false) {
   isLotting = status;
 }
 
+function handlePrompt() {
+  let input = prompt('请输入抽取的人数');
+  console.log(input, typeof input, 111);
+  if (input !== null && input !== "" && !isNaN(input) && Number(input) > 0) {
+    EACH_COUNT[currentPrizeIndex] = parseInt(input);
+  } else {
+    EACH_COUNT[currentPrizeIndex] = 1;
+  }
+}
+
 /**
  * 事件绑定
  */
@@ -265,11 +275,7 @@ function bindEvent() {
         changePrize();
         resetCard().then(res => {
           // 抽奖
-          let input = prompt('请输入抽取的人数');
-          console.log(input, typeof input, 111);
-          if (input !== null && input !== "" && !isNaN(input) && Number(input) > 0) {
-            EACH_COUNT[currentPrizeIndex] = parseInt(input);
-          }
+          handlePrompt();
           lottery();
           addQipao(`正在抽取[${currentPrize.title}],调整好姿势`);
         });
@@ -287,6 +293,7 @@ function bindEvent() {
         // 抽奖
         resetCard().then(res => {
           // 抽奖
+          handlePrompt();
           lottery();
         });
         break;
