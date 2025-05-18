@@ -56,8 +56,9 @@ let selectedCardIndex = [],
   // 正在抽奖
   isLotting = false,
   currentLuckys = [];
-
-initAll();
+if (window.localStorage.getItem("lotteryData") === 'dds') {
+  initAll();
+}
 
 /**
  * 初始化所有DOM
