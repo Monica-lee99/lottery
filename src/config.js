@@ -23,7 +23,7 @@ const EACH_COUNT = [1];
 /**
  * 卡片公司名称标识
  */
-const COMPANY = "MoShang";
+const COMPANY = "SSSZ";
 
 module.exports = {
   prizes,
