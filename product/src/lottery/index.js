@@ -64,7 +64,7 @@ initAll();
  */
 function initAll() {
   window.AJAX({
-    url: "/getTempData",
+    url: "https://1304472858-1gdg0ehit7.ap-guangzhou.tencentscf.com/getTempData",
     success(data) {
       // 获取基础数据
       prizes = data.cfgData.prizes;
@@ -101,7 +101,7 @@ function initAll() {
   });
 
   window.AJAX({
-    url: "/getUsers",
+    url: "https://1304472858-1gdg0ehit7.ap-guangzhou.tencentscf.com/getUsers",
     success(data) {
       basicData.users = data;
 
@@ -763,7 +763,7 @@ function shineCard() {
 function setData(type, data) {
   return new Promise((resolve, reject) => {
     window.AJAX({
-      url: "/saveData",
+      url: "https://1304472858-1gdg0ehit7.ap-guangzhou.tencentscf.com/saveData",
       data: {
         type,
         data
@@ -781,7 +781,7 @@ function setData(type, data) {
 function setErrorData(data) {
   return new Promise((resolve, reject) => {
     window.AJAX({
-      url: "/errorData",
+      url: "https://1304472858-1gdg0ehit7.ap-guangzhou.tencentscf.com/errorData",
       data: {
         data
       },
@@ -797,7 +797,7 @@ function setErrorData(data) {
 
 function exportData() {
   window.AJAX({
-    url: "/export",
+    url: "https://1304472858-1gdg0ehit7.ap-guangzhou.tencentscf.com/export",
     success(data) {
       if (data.type === "success") {
         location.href = data.url;
@@ -808,7 +808,7 @@ function exportData() {
 
 function reset() {
   window.AJAX({
-    url: "/reset",
+    url: "https://1304472858-1gdg0ehit7.ap-guangzhou.tencentscf.com/reset",
     success(data) {
       console.log("重置成功");
     }
