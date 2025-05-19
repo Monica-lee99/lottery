@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
   <head>
     <title>点名器</title>
     <meta charset="utf-8" />
@@ -7,15 +7,171 @@
       name="viewport"
       content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
-    <!-- <link rel="stylesheet" href="./index.css"> -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      rel="stylesheet"
+    />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#165DFF",
+              secondary: "#0CB4F1",
+              dark: "#1D2939",
+              light: "#F9FAFB",
+              success: "#00B42A",
+              warning: "#FF7D00",
+              danger: "#F53F3F",
+            },
+            fontFamily: {
+              inter: ["Inter", "system-ui", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <style type="text/tailwindcss">
+      @layer utilities {
+        .content-auto {
+          content-visibility: auto;
+        }
+        .password-strength-bar {
+          height: 4px;
+          transition: width 0.3s ease;
+        }
+        .input-focus-ring {
+          @apply ring-2 ring-primary/50 ring-offset-2 ring-offset-white;
+        }
+        .password-toggle {
+          @apply absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-gray-400 hover:text-primary transition-colors;
+        }
+      }
+    </style>
   </head>
-
-  <body>
+  <body
+    class="bg-gradient-to-br from-blue-50 to-indigo-50 min-h-screen font-inter flex items-center justify-center p-4"
+  >
     <script src="./lib/three.min.js"></script>
     <script src="./lib/tween.min.js"></script>
     <script src="./lib/TrackballControls.js"></script>
     <script src="./lib/CSS3DRenderer.js"></script>
     <script src="./lib/ajax.js"></script>
+    <div id="formInstance" class="w-full max-w-md bg-white rounded-2xl shadow-xl overflow-hidden" style="position: absolute;">
+      <div class="p-8">
+        <div class="text-center mb-8">
+          <h2 class="text-[clamp(1.5rem,3vw,2rem)] font-bold text-dark">
+            安全登录
+          </h2>
+          <p class="text-gray-500 mt-2">请输入您的账户密码</p>
+        </div>
+
+        <form id="loginForm" class="space-y-6">
+          <div class="relative">
+            <label
+              for="username"
+              class="block text-sm font-medium text-gray-700 mb-1"
+              >用户名</label
+            >
+            <div class="relative">
+              <span
+                class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500"
+              >
+                <i class="fa-solid fa-user"></i>
+              </span>
+              <input
+                type="text"
+                id="username"
+                name="username"
+                class="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:input-focus-ring transition-all duration-300"
+                placeholder="请输入用户名"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="relative">
+            <div class="flex justify-between items-center mb-1">
+              <label
+                for="password"
+                class="block text-sm font-medium text-gray-700"
+                >密码</label
+              >
+              <a href="#" class="text-xs text-primary hover:underline"
+                >忘记密码?</a
+              >
+            </div>
+            <div class="relative">
+              <span
+                class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500"
+              >
+                <i class="fa-solid fa-lock"></i>
+              </span>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                class="w-full pl-10 pr-10 py-3 rounded-lg border border-gray-300 focus:outline-none focus:input-focus-ring transition-all duration-300"
+                placeholder="请输入密码"
+                required
+              />
+              <div type="button" id="togglePassword" class="password-toggle">
+                <i class="fa-regular fa-eye-slash"></i>
+              </div>
+            </div>
+
+            <!-- 密码强度指示器 -->
+            <div class="mt-2">
+              <div class="flex justify-between text-xs mb-1">
+                <span id="strengthText" class="text-gray-500">密码强度</span>
+                <span id="strengthPercentage" class="text-gray-500">0%</span>
+              </div>
+              <div class="w-full bg-gray-200 rounded-full h-1 overflow-hidden">
+                <div
+                  id="strengthBar"
+                  class="password-strength-bar bg-danger w-0 rounded-full"
+                ></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between">
+            <div class="flex items-center">
+              <input
+                id="remember-me"
+                type="checkbox"
+                class="h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded"
+              />
+              <label for="remember-me" class="ml-2 block text-sm text-gray-700"
+                >记住我</label
+              >
+            </div>
+          </div>
+
+          <div
+            style="text-align: center; cursor: pointer;"
+            type="submit"
+            class="submit-button w-full bg-primary hover:bg-primary/90 text-white font-medium py-3 px-4 rounded-lg transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 focus:ring-offset-white"
+          >
+            登录
+          </div>
+        </form>
+
+        <div class="mt-8 text-center">
+          <p class="text-sm text-gray-600">
+            还没有账户?
+            <a href="#" class="text-primary hover:underline font-medium"
+              >立即注册</a
+            >
+          </p>
+        </div>
+      </div>
+    </div>
 
     <div class="canvas-box">
       <canvas id="canvas">你的浏览器不支持canvas</canvas>
@@ -35,7 +191,9 @@
         <button id="lottery">开始点名</button>
         <button id="reLottery">重新点名</button>
         <div class="fixed-bar">
-          <button id="save" class="fixed-btn" style="display: none">导出抽奖结果</button>
+          <button id="save" class="fixed-btn" style="display: none">
+            导出抽奖结果
+          </button>
           <button id="reset" class="fixed-btn">重置</button>
         </div>
       </div>

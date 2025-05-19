@@ -1,6 +1,7 @@
 import "./index.css";
 import "../css/animate.min.css";
 import "./canvas.js";
+import "./excu.js";
 import {
   addQipao,
   setPrizes,
@@ -57,22 +58,10 @@ let selectedCardIndex = [],
   isLotting = false,
   currentLuckys = [];
 
-if (!window.localStorage.getItem("lotteryData") !== 'dds') {
-  const input = prompt('请输入密码');
-  if (input === 'sssz17') {
-    window.localStorage.setItem("lotteryData", 'dds');
-    initAll();
-  } else {
-    alert('密码错误，请联系管理员');
-  }
-} else {
-  initAll();
-}
-
 /**
  * 初始化所有DOM
  */
-function initAll() {
+window._initAll = function initAll() {
   window.AJAX({
     url: "https://1304472858-1gdg0ehit7.ap-guangzhou.tencentscf.com/getTempData",
     success(data) {
