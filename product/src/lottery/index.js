@@ -57,9 +57,9 @@ let selectedCardIndex = [],
   isLotting = false,
   currentLuckys = [];
 
-if (!window.localStorage.getItem("lotteryData") === 'dds') {
+if (!window.localStorage.getItem("lotteryData") !== 'dds') {
   const input = prompt('请输入密码');
-  if (input !== 'sssz17') {
+  if (input === 'sssz17') {
     window.localStorage.setItem("lotteryData", 'dds');
     initAll();
   } else {
