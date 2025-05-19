@@ -4,6 +4,11 @@ const passwordInput = document.getElementById("password");
 const strengthBar = document.getElementById("strengthBar");
 const strengthText = document.getElementById("strengthText");
 const strengthPercentage = document.getElementById("strengthPercentage");
+const enter = document.getElementById("enter");
+
+enter.style.display = "none";
+
+
 
 togglePassword.addEventListener("click", function () {
   const type =
@@ -96,6 +101,7 @@ submitButton.addEventListener("click", function (e) {
   setTimeout(() => {
     // 恢复按钮状态
     if (formData.username === "dds" && formData.password === "sssz17") {
+      enter.style.display = "inline-block";
       const form = document.querySelector("#formInstance");
       if (form) form.style.display = "none";
       window._initAll();
