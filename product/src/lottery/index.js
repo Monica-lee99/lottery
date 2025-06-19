@@ -1,7 +1,7 @@
 import "./index.css";
 import "../css/animate.min.css";
 import "./canvas.js";
-import "./excu.js";
+// import "./excu.js";
 import {
   addQipao,
   setPrizes,
@@ -881,3 +881,5 @@ window.onload = function () {
     musicBox.click();
   }, 1000);
 };
+
+initAll();
